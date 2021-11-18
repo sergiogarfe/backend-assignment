@@ -17,13 +17,13 @@ backend-down:
 	docker-compose down
 
 backend-dump:
-	docker-compose exec -T mongodb sh -c 'mongodump --authenticationDatabase admin -u ${DB_USER} -p ${DB_PASS} -o /dbdump'
+	docker-compose exec -T db sh -c 'mongodump --authenticationDatabase admin -u ${DB_USER} -p ${DB_PASS} -o /dbdump'
 
 backend-load:
-	docker-compose exec -T mongodb sh -c 'mongorestore --authenticationDatabase admin -u ${DB_USER} -p ${DB_PASS} --dir=/dbdump'
+	docker-compose exec -T db sh -c 'mongorestore --authenticationDatabase admin -u ${DB_USER} -p ${DB_PASS} --dir=/dbdump'
 
 backend-dbshell:
-	docker-compose exec mongodb mongo --authenticationDatabase admin -u ${DB_USER} -p ${DB_PASS}
+	docker-compose exec db mongo --authenticationDatabase admin -u ${DB_USER} -p ${DB_PASS}
 
 backend-test: backend-dump
 	echo ""

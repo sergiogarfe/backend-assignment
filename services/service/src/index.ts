@@ -1,6 +1,10 @@
 import * as path from 'path';
 import * as mongoose from 'mongoose';
 
+import {
+  fecthExchangePriceFromCurrencies
+} from "./controllers/currency.history.controller";
+
 
 // [DB Connection]
 
@@ -18,18 +22,32 @@ async function connectToDatabase(connectionUri: string) {
     // useCreateIndex are deprecated and default to true
     mongoose
     .connect(connectionUri)
-      .then(() =>
+      .then(() =>{
+        console.log("database ok");
         resolve(connectionUri)
-      )
+      })
       .catch((error: any) => {
         console.log(error)
         reject(`${connectionUri}: ${error}`)
       });
   })
 }
+
 connectToDatabase(MONGODB_URI);
 
 // [Script execution]
+console.log('Executing service...');
 
-console.log('Executing service...')
-process.exit(0);
+
+fecthExchangePriceFromCurrencies()
+  .then(text => {
+      console.log(text);
+      process.exit(0);
+  })
+  .catch(err => {
+      // Deal with the fact the chain failed
+      process.exit(0);
+  });
+
+
+// 

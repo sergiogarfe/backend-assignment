@@ -1,7 +1,6 @@
-import * as path from 'path';
 import * as express from 'express';
 import * as mongoose from 'mongoose';
-
+import Router from "./routes";
 
 // [DB Connection]
 
@@ -28,7 +27,7 @@ async function connectToDatabase(connectionUri: string) {
       });
   })
 }
-connectToDatabase(MONGODB_URI);
+connectToDatabase(MONGODB_URI||"mongodb://127.0.0.1/test");
 
 // [Express setup]
 
@@ -39,7 +38,7 @@ app.use(express.json());
 app.get('/health', async (req, res) => {
   res.status(200).json({healthy: true});
 });
-
+app.use(Router);
 // [Express start]
 
 const PORT: number | string = process.env.PORT || 8080
