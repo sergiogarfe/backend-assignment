@@ -107,3 +107,23 @@ Following is a more-in-depth list of the available command for each service:
 Backend position skill assessment home assignment.
 
 **[Place here any extra documentation or comments you want us to have.]**
+## Endpoints
+
+* GET Currencies
+     DESC:  Return array of available currencies
+     PATH: /currency 
+* GET Currency
+     DESC:  Return currency by code
+     PATH: /currency/:code
+* POST Currency
+     DESC: Add currency by code
+     PATH: /currency  
+* DELETE Currency
+     DESC: Delete currency by code
+     PATH: /currency  
+* GET Historical
+     DESC: Get historical currencies by codes
+     PATH: /history
+     PARAMS: 
+     - codes: EJ: USD,BTC,...
+     - fields: EJ: ask,bid,spread,...  
